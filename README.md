@@ -1,4 +1,4 @@
-# nyc-taxi-etl-pyspark-pipeline
+# NYC Taxi ETL PySpark Pipeline
 
 A **batch ETL pipeline** that ingests the free [NYC TLC Trip Record Data](https://www.nyc.gov/site/tlc/about/tlc-trip-record-data.page)
 (yellow / green / FHV taxi trip Parquet files), cleans and enriches them with **PySpark**, joins them
@@ -77,6 +77,8 @@ and shown in the UI Logs tab — no separate cluster, SSH, or Spark master URL j
 ├── spark/
 │   ├── data/taxi_zone_lookup.csv   # committed fallback (265 zones)
 │   └── jobs/taxi_etl.py            # the PySpark job (clean / aggregate / all)
+├── screenshots/
+│   └── airflow-dashboard.png       # the DAG graph view (live run) — see §7
 └── data/                     # generated at runtime (git-ignored)
     ├── raw/                  #   raw TLC parquet + _manifest.json
     ├── dimensions/           #   taxi_zone_lookup.csv (downloaded)
@@ -228,6 +230,13 @@ neighborhoods, and JFK Airport carries the day's airport traffic.
 **In the Airflow UI**, green task instances + the **Details** tab per task give you the live
 picture: the DAG graph, run durations, and each task's **Log** stream showing download byte
 counts and Spark row counts at every cleaning stage.
+
+![Airflow UI Graph view of the nyc_taxi_trip_etl DAG showing a completed success run: all five tasks green and the Run Details panel](screenshots/airflow-dashboard.png)
+
+*The `nyc_taxi_trip_etl` DAG in the Airflow **Graph** view after a successful manual run
+(**Status: success**): the status legend, all five tasks green in dependency order
+`download_raw_trips → download_zone_lookup → clean_trips → aggregate_trips → validate_outputs`,
+and the Run Details panel — manual run, 9m 15s duration, data interval Aug 2025–Sep 2025.*
 
 ## 8. Troubleshooting
 
