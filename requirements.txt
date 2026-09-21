@@ -1,0 +1,4 @@
+# Python dependencies installed into the Airflow container image.
+# The same file doubles as the dep list for a dedicated Spark box, if preferred.
+pyspark==3.5.5
+pyarrow==17.0.0

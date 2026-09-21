@@ -1,0 +1,55 @@
+# ------------------------------------------------------------------ Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+
+# ------------------------------------------------------------------ Tooling
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.tox/
+nox/
+
+# ------------------------------------------------------------------ Secrets / env
+# Keep .env.example readable, ignore real .env files.
+.env
+.env.*
+!.env.example
+
+# ------------------------------------------------------------------ Data outputs
+# Raw + processed + downloaded dimensions are all generated at runtime.
+data/raw/*
+data/processed/*
+data/dimensions/*
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/dimensions/.gitkeep
+
+# Spark warehouse / metastore leftovers (only if a job runs a hive-enabled session)
+spark-warehouse/
+metastore_db/
+derby.log
+
+# ------------------------------------------------------------------ Airflow
+logs/
+plugins/sql/*.zip
+
+# ------------------------------------------------------------------ IDE / OS
+.idea/
+.vscode/
+*.iml
+*.swp
+.DS_Store
+Thumbs.db
+
+# ------------------------------------------------------------------ OS junk
+*.tmp
+*.bak

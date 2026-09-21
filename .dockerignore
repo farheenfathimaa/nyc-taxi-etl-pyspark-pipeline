@@ -1,0 +1,27 @@
+# Keep the Docker build context small: only the pieces the Airflow image needs.
+.git
+# environment / secrets
+.env
+.env.*
+!.env.example
+# generated data + logs (mounted at runtime, never baked into the image)
+data/
+logs/
+spark-warehouse/
+metastore_db/
+# python + tooling caches
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+# IDE / OS
+.idea/
+.vscode/
+*.iml
+.DS_Store
+Thumbs.db
+*.tmp
+*.bak
